@@ -1,22 +1,35 @@
 package buzon;
 import java.util.*;
 
-public class Buzon {
-    
-    static Mensaje mensaje;
-    static Remitente remitente;
-    static Destinatario destinatario;
-    static ArrayList<Mensaje> mensajes = new ArrayList<>();
-    static ArrayList<Destinatario> suscriptores = new ArrayList<>();
 
-    public static void recibirMensaje(Mensaje men){
-        System.out.println("Recibiendo mensaje de: " + men.getRemitente().getNombre());
-        mensajes.add(men);
+public class Buzon {
+
+    private String nombre;
+    ArrayList<Mensaje> mensajes = new ArrayList<>();
+    ArrayList<Destinatario> suscriptores = new ArrayList<>();
+
+    public Buzon(String nombre){
+    this.nombre = nombre;
     }
 
-    
-    public static Destinatario entregarMensaje(Destinatario des){
-        System.out.println("Mensaje entregado a: " + des.nombre);
+    public void recibirMensaje(Mensaje men){
+        for(int i=0; i<suscriptores.size();i++){
+            
+            if(suscriptores.get(i).equals(men.getDestinatario())){
+                suscriptores.get(i).tomarMensaje(men);
+            }
+
+            System.out.println("\n"+"Recibiendo mensaje de: " + men.getRemitente().getNombre());
+            System.out.println(suscriptores.get(i));
+        }
+        // mensajes.add(men);
+    }
+
+
+    //Metodo no utilizado, utilizar en caso de que queramos que el usuario pida el mensaje
+    /*
+     public Destinatario entregarMensaje(Destinatario des){
+        System.out.println("Mensaje/s entregado a: " + des.nombre);
         
         for (int i = 0; i < mensajes.size(); i++) {
             Mensaje mensajeActual = mensajes.get(i);
@@ -29,24 +42,20 @@ public class Buzon {
         }
         return des;
     }
-
-    public static void suscriptoresBuzon(Destinatario des){
-        for(int i=0; i<destinatario.destinatarios.size() ; i++){
-            if(destinatario.suscripto == true){
-                suscriptores.add(des);
-            }if(destinatario.suscripto == false){
-                OtroBuzon.suscriptores.add(des);
-            }
-        }  
+    */
+    
+    
+    public void agregarSuscriptor(Destinatario des) {
+        this.suscriptores.add(des);
     }
 
-    public static void imprimirBuzon() {
-        String str = "-------------- Buzon ------------- \n";
+    @Override
+    public String toString() {
+        String str = "-------------- " + nombre + " -------------- \n";
         for (int i = 0; i < mensajes.size(); i++) {
             str += mensajes.get(i).toString() + "\n";
             str += "----------------------------------\n";
         }
-        
-        System.out.println(str);
+        return str;
     }
 }

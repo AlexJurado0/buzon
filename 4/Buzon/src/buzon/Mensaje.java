@@ -23,7 +23,6 @@ public class Mensaje {
     public void setRemitente(Remitente remitente) {
         this.remitente = remitente;
     }
-    
     public String toString() {
     
         return  "Remitente: " + remitente.nombre +"\n" + "Destinatario: " + destinatario.nombre + "\n" + "Mensaje: " + this.texto ;

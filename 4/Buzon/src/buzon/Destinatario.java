@@ -5,10 +5,9 @@ public class Destinatario extends Persona {
     
     ArrayList<Mensaje> mensajes = new ArrayList<>();
     ArrayList<Destinatario> destinatarios = new ArrayList<>();
-    boolean suscripto;
-    public Destinatario (String nombre,boolean suscripto){
+
+    public Destinatario (String nombre){
         super(nombre);
-        this.suscripto = suscripto;
     }    
 
     public void almacenarDestinatarios(Destinatario des){
